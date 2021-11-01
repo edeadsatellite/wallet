@@ -203,15 +203,10 @@ export function PoolSwapScreen ({ route }: Props): JSX.Element {
 
   useEffect(() => {
     if (poolpair !== undefined) {
-      let [tokenASymbol, tokenBSymbol] = poolpair.symbol.split('-') as [string, string]
-      let [tokenAId, tokenBId] = [poolpair.tokenA.id, poolpair.tokenB.id]
-      let [tokenADisplaySymbol, tokenBDisplaySymbol] = [poolpair.tokenA.displaySymbol, poolpair.tokenB.displaySymbol]
-      if (tokenA !== undefined) {
-        [tokenASymbol, tokenAId, tokenADisplaySymbol] = [tokenA.symbol, tokenA.id, tokenA.displaySymbol]
-      }
-      if (tokenB !== undefined) {
-        [tokenBSymbol, tokenBId, tokenBDisplaySymbol] = [tokenB.symbol, tokenB.id, tokenB.displaySymbol]
-      }
+      const [tokenASymbol, tokenBSymbol] = poolpair.symbol.split('-') as [string, string]
+      const [tokenAId, tokenBId] = [poolpair.tokenA.id, poolpair.tokenB.id]
+      const [tokenADisplaySymbol, tokenBDisplaySymbol] = [poolpair.tokenA.displaySymbol, poolpair.tokenB.displaySymbol]
+
       const a = getAddressTokenById(tokenAId) ?? {
         id: tokenAId,
         amount: '0',
@@ -219,6 +214,7 @@ export function PoolSwapScreen ({ route }: Props): JSX.Element {
         displaySymbol: tokenADisplaySymbol
       }
       setTokenA(a)
+
       const b = getAddressTokenById(tokenBId) ?? {
         id: tokenBId,
         amount: '0',
@@ -226,6 +222,7 @@ export function PoolSwapScreen ({ route }: Props): JSX.Element {
         displaySymbol: tokenBDisplaySymbol
       }
       setTokenB(b)
+
       updatePoolPairPrice(tokenAId, poolpair)
     }
   }, [JSON.stringify(tokens), poolpair])
